@@ -30,20 +30,17 @@
             var ws = new WebSocket("wss://echo.websocket.org");
      
             ws.onopen = function() {
-               
-               // Web Socket is connected, send data using send()
-               ws.send("Message to send");
-               alert("Message is sent...");
+               var msg = "Hello world!";
+               ws.send(msg);
+               alert("Message is sent: ");
             };
      
             ws.onmessage = function (evt) { 
                var received_msg = evt.data;
-               alert("Message is received...");
+               alert("Message is received: " + received_msg);
             };
      
             ws.onclose = function() { 
-               
-               // websocket is closed.
                alert("Connection is closed..."); 
             };
          } else {
