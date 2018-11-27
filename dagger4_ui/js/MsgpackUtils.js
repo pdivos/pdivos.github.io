@@ -62,6 +62,9 @@ function DCallUnpacker(buffer) {
     var v = msgpack.decode(buffer, {codec:MsgpackUtils_codec});
     return new DCall(v);
 }
+function TupleUnpacker(buffer) {
+    return msgpack.decode(buffer, {codec:MsgpackUtils_codec});
+}
 
 var MsgpackUtils_codec = msgpack.createCodec();
 MsgpackUtils_codec.addExtPacker(0x73, DStatus, DStatusPacker);
@@ -80,6 +83,8 @@ MsgpackUtils_codec.addExtPacker(0x44, Diddles, DiddlesPacker);
 MsgpackUtils_codec.addExtUnpacker(0x44, DiddlesUnpacker);
 MsgpackUtils_codec.addExtPacker(0x43, DCall, DCallPacker);
 MsgpackUtils_codec.addExtUnpacker(0x43, DCallUnpacker);
+// no packer for tuple because no tuple in javascript
+MsgpackUtils_codec.addExtUnpacker(0x54, TupleUnpacker);
 
 class MsgpackUtils {
     static pack(o) {
@@ -101,3 +106,4 @@ class MsgpackUtils {
 // 0x64 'd' Diddle
 // 0x44 'D' Diddles
 // 0x43 'C' DCall
+// 0x54 'T' tuple
