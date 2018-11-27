@@ -11,7 +11,8 @@ function main() {
             new DCall("dcommitset#1234567","func",[19],0,new Diddles([])),
         ];
         c.echo(test, console.log);
-        c.err(console.log);
+        // c.err(console.log);
+        // c.err(console.log);
     });
 }
   

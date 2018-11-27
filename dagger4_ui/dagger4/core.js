@@ -49,6 +49,9 @@ class DError {
         this.message = message
     }
 }
+DError.prototype.toString = function() {
+    return "DError: " + this.message;
+}
 
 class Diddle {
     constructor(func, args, ts, value) {
