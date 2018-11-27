@@ -25,7 +25,7 @@ class Client {
             {
                 var buffer = e.srcElement.result;//arraybuffer object
                 e = _this.callbacks.pop();
-                // e("Client", 27, buffer);
+                e("Client", "onmessage", buffer);
                 var msg = MsgpackUtils.unpack(new Uint8Array(buffer));
                 e("Client", "onmessage", msg);
             });
@@ -50,7 +50,16 @@ class Client {
         this._call("ping",[],e);
     }
     test(e) {
-        this._call("test",[DStatus.SUCCEEDED],e);
+        this._call("test",[[
+            DStatus.SUCCEEDED,
+            DFunType.LAMBDA,
+            new Set([1,2,3]),
+            new DRef(new Uint8Array([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19])),
+            new DError("My Error message"),
+            new Diddle("func",[19],0,1),
+            new Diddles([new Diddle("func",[19],0,1)]),
+            new DCall("dcommitset#1234567","func",[19],0,new Diddles([])),
+        ]],e);
     }
 }
 

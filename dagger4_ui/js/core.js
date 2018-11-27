@@ -17,3 +17,51 @@ class DStatus {
 DStatus.prototype.toString = function() {
     return this.s;
 }
+
+
+class DFunType {
+    static get LAMBDA() { return new DFunType(0); }
+    static get FUNCTION() { return new DFunType(1); }
+    constructor(v) {
+        this.v = v;
+        if(this.v==0) this.s = "LAMBDA";
+        else if(this.v==1) this.s = "FUNCTION";
+        else throw "Invalid value " + v;
+    }
+}
+DFunType.prototype.toString = function() {
+    return this.s;
+}
+
+class DRef {
+    constructor(v) {
+        assert(v instanceof Uint8Array, v);
+        assert(v.length == 20);
+        this.v = v;
+    }
+}
+DRef.prototype.toString = function() {
+    return hex(this.v);
+}
+
+class DError {
+    constructor(message) {
+        this.message = message
+    }
+}
+
+class Diddle {
+    constructor(func, args, ts, value) {
+        this.v = [func, args, ts, value];
+    }
+}
+class Diddles {
+    constructor(v) {
+        this.v = v;
+    }
+}
+class DCall {
+    constructor(dcommitset, func, args, ts, diddles) {
+        this.v = [dcommitset, func, args, ts, diddles];
+    }
+}
