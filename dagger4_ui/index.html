@@ -5,53 +5,25 @@
     <title>Add React in One Minute</title>
   </head>
   <body>
-
+    <!--
     <h2>Add React in One Minute</h2>
     <p>This page demonstrates using React with no build tooling.</p>
     <p>React is loaded as a script tag.</p>
-
-    <!-- We will put our React component inside this div. -->
     <div id="like_button_container"></div>
-
-    <!-- Load React. -->
-    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <h5>Note: when deploying, replace "development.js" with "production.min.js".</h5>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="js/like_button.js"></script>
+    -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/msgpack-lite/0.1.26/msgpack.min.js" crossorigin></script>
+    <script src="js/core.js"></script>
+    <script src="js/MsgpackUtils.js"></script>
+    <script src="js/Client.js"></script>
+    <script src="js/main.js"></script>
 
-    <!-- Load our React component. -->
-    <script src="like_button.js"></script>
     <script type = "text/javascript">
-      function WebSocketTest() {
-         
-         if ("WebSocket" in window) {
-            alert("WebSocket is supported by your Browser!");
-            
-            // Let us open a web socket
-            var ws = new WebSocket("wss://echo.websocket.org");
-     
-            ws.onopen = function() {
-               var msg = "Hello world!";
-               ws.send(msg);
-               alert("Message is sent: ");
-            };
-     
-            ws.onmessage = function (evt) { 
-               var received_msg = evt.data;
-               alert("Message is received: " + received_msg);
-            };
-     
-            ws.onclose = function() { 
-               alert("Connection is closed..."); 
-            };
-         } else {
-           
-            // The browser doesn't support WebSocket
-            alert("WebSocket NOT supported by your Browser!");
-         }
-      }
+      main();
     </script>
-    <div id = "sse">
-        <a href = "javascript:WebSocketTest()">Run WebSocket</a>
-    </div>
   </body>
 </html>
