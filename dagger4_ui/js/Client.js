@@ -9,7 +9,6 @@ class Client {
         this.onresponse = onresponse;
         
         var ws= new WebSocket("ws://"+host+":8000/dagger");
-        console.log(20,ws);
         ws.binaryType = "Uint8Array";
         var _this = this;
         ws.onopen = function() {
@@ -54,6 +53,7 @@ class Client {
 
     _call(method, args) {
         assert(typeof method === 'string', method);
+        if(args == undefined) args = [];
         assert(typeof args === 'object', args);
         console.log("Request", method, args);
         this.methods[this.msg_id_autoinc] = method;
@@ -65,22 +65,25 @@ class Client {
     }
 
     shutdown() {
-        return this._call("shutdown",[]);
+        return this._call("shutdown");
     }
     ping() {
-        return this._call("ping",[]);
+        return this._call("ping");
     }
     echo(v) {
         return this._call("echo",[v]);
     }
     err() {
-        return this._call("err",[]);
+        return this._call("err");
+    }
+    get_dcommitsets() {
+        return this._call("get_dcommitsets")
     }
     get_nodes() {
-        return this._call("get_nodes",[]);
+        return this._call("get_nodes");
     }
     get_nodes_raw() {
-        return this._call("get_nodes_raw",[]);
+        return this._call("get_nodes_raw");
     }
     get_node(id) {
         assert(id instanceof int, id);
@@ -91,7 +94,7 @@ class Client {
         return this._call("build",[dcommitset]);
     }
     worker_logs() {
-        return this._call("worker_logs",[]);
+        return this._call("worker_logs");
     }
 }
 
