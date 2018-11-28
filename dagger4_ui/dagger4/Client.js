@@ -17,6 +17,7 @@ class Client {
             if(err.message.includes("net::ERR_SSL_PROTOCOL_ERROR"))
                 alert("Please go to 35.176.145.209:8888 and accept the certificate.");
         }
+        console.log(20,ws);
         ws.binaryType = "Uint8Array";
         var _this = this;
         ws.onopen = function() {
