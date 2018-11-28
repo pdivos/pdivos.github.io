@@ -8,7 +8,7 @@ class Client {
         this.msg_id_autoinc = 0;
         this.onresponse = onresponse;
 
-        var ws = new WebSocket("ws://"+host+":8000/dagger");
+        var ws = new WebSocket("wss://"+host+":8000/dagger");
         ws.binaryType = "Uint8Array";
         var _this = this;
         ws.onopen = function() {
