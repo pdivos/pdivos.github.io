@@ -8,15 +8,7 @@ class Client {
         this.msg_id_autoinc = 0;
         this.onresponse = onresponse;
         
-        var ws;
-        try {
-            ws = new WebSocket("wss://"+host+":8000/dagger");
-        } catch(err) {
-            console.log(err);
-            console.log(err.message);
-            if(err.message.includes("net::ERR_SSL_PROTOCOL_ERROR"))
-                alert("Please go to 35.176.145.209:8888 and accept the certificate.");
-        }
+        var ws= new WebSocket("ws://"+host+":8000/dagger");
         console.log(20,ws);
         ws.binaryType = "Uint8Array";
         var _this = this;
