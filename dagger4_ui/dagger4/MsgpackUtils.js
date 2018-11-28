@@ -60,7 +60,7 @@ function DCallPacker(v) {
 }
 function DCallUnpacker(buffer) {
     var v = msgpack.decode(buffer, {codec:MsgpackUtils_codec});
-    return new DCall(v);
+    return new DCall(v[0],v[1],v[2],v[3],v[4]);
 }
 function TupleUnpacker(buffer) {
     return msgpack.decode(buffer, {codec:MsgpackUtils_codec});

@@ -1,9 +1,12 @@
 class Client {
-    constructor(host, onopen) {
+    constructor(host, onopen, onresponse) {
         if (!"WebSocket" in window) {
             alert("WebSocket NOT supported by your Browser!");
             throw "WebSocket NOT supported by your Browser!";
         }
+
+        this.msg_id_autoinc = 0;
+        this.onresponse = onresponse;
 
         var ws = new WebSocket("ws://"+host+":8000/dagger");
         ws.binaryType = "Uint8Array";
@@ -24,12 +27,17 @@ class Client {
             myReader.addEventListener("loadend", function(e)
             {
                 var buffer = e.srcElement.result;//arraybuffer object
-                e = _this.callbacks.pop();
                 var msg = MsgpackUtils.unpack(new Uint8Array(buffer));
-                if(msg instanceof DError) {
-                    throw msg;
+                var msg_id = msg['msg_id'];
+                var response = msg['response'];
+                var method = _this.methods[msg_id];
+                var args = _this.argss[msg_id];
+                delete _this.methods[msg_id];
+                delete _this.argss[msg_id];
+                if(response instanceof DError) {
+                    throw response;
                 } else {
-                    e(msg);
+                    _this.onresponse(msg_id, method, args, response);
                 }
             });
         };
@@ -39,24 +47,50 @@ class Client {
         };
 
         this.ws = ws;
-        this.callbacks = [];
+        this.methods = [];
+        this.argss = [];
     }
 
-    _call(method, args, e) {
-        e("Client", "call", method, args);
-        this.callbacks.push(e);
-        var msg = MsgpackUtils.pack({"method":method,"args":args});
+    _call(method, args) {
+        assert(typeof method === 'string', method);
+        assert(typeof args === 'object', args);
+        console.log("Request", method, args);
+        this.methods[this.msg_id_autoinc] = method;
+        this.argss[this.msg_id_autoinc] = args;
+        var msg = MsgpackUtils.pack({"method":method,"args":args,"msg_id":this.msg_id_autoinc});
+        this.msg_id_autoinc++;
         this.ws.send(msg);
+        return this.msg_id_autoinc-1
     }
 
-    ping(e) {
-        this._call("ping",[],e);
+    shutdown() {
+        return this._call("shutdown",[]);
     }
-    echo(v, e) {
-        this._call("echo",[v],e);
+    ping() {
+        return this._call("ping",[]);
     }
-    err(e) {
-        this._call("err",[],e);
+    echo(v) {
+        return this._call("echo",[v]);
+    }
+    err() {
+        return this._call("err",[]);
+    }
+    get_nodes() {
+        return this._call("get_nodes",[]);
+    }
+    get_nodes_raw() {
+        return this._call("get_nodes_raw",[]);
+    }
+    get_node(id) {
+        assert(id instanceof int, id);
+        return this._call("get_node",[id]);
+    }
+    build(dcommitset) {
+        assert(typeof dcommitset === 'string', dcommitset);
+        return this._call("build",[dcommitset]);
+    }
+    worker_logs() {
+        return this._call("worker_logs",[]);
     }
 }
 
