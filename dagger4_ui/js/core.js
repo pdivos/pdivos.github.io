@@ -4,7 +4,7 @@ class DStatus {
     static get WAITING() { return new DStatus(2); }
     static get SUCCEEDED() { return new DStatus(3); }
     static get FAILED() { return new DStatus(4); }
-    static get DIDDLE() { return new DStatus(5); }
+    static get FIDDLE() { return new DStatus(5); }
     constructor(v) {
         this.v = v;
         if(this.v==0) this.s = "READY";
@@ -12,7 +12,7 @@ class DStatus {
         else if(this.v==2) this.s = "WAITING";
         else if(this.v==3) this.s = "SUCCEEDED";
         else if(this.v==4) this.s = "FAILED";
-        else if(this.v==5) this.s = "DIDDLE";
+        else if(this.v==5) this.s = "FIDDLE";
         else throw "Invalid value " + v;
     }
 }
@@ -55,21 +55,21 @@ DError.prototype.toString = function() {
     return "DError: " + this.message;
 }
 
-class Diddle {
+class Fiddle {
     constructor(func, args, ts, value) {
         this.v = [func, args, ts, value];
     }
 }
-class Diddles {
+class Fiddles {
     constructor(v) {
         this.v = v;
     }
 }
 class DCall {
-    constructor(dcommitset, func, args, ts, diddles) {
+    constructor(dcommitset, func, args, ts, fiddles) {
         assert(typeof dcommitset === 'string')
         assert(typeof func === 'string')
         assert(typeof ts === 'number')
-        this.v = [dcommitset, func, args, ts, diddles];
+        this.v = [dcommitset, func, args, ts, fiddles];
     }
 }

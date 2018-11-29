@@ -38,21 +38,21 @@ function DErrorUnpacker(buffer) {
     var v = msgpack.decode(buffer);
     return new DError(v);
 }
-function DiddlePacker(v) {
-    assert(v instanceof Diddle);
+function FiddlePacker(v) {
+    assert(v instanceof Fiddle);
     return msgpack.encode(v.v);
 }
-function DiddleUnpacker(buffer) {
+function FiddleUnpacker(buffer) {
     var v = msgpack.decode(buffer);
-    return new Diddle(v[0],v[1],v[2],v[3]);
+    return new Fiddle(v[0],v[1],v[2],v[3]);
 }
-function DiddlesPacker(v) {
-    assert(v instanceof Diddles);
+function FiddlesPacker(v) {
+    assert(v instanceof Fiddles);
     return msgpack.encode(v.v, {codec:MsgpackUtils_codec});
 }
-function DiddlesUnpacker(buffer) {
+function FiddlesUnpacker(buffer) {
     var v = msgpack.decode(buffer, {codec:MsgpackUtils_codec});
-    return new Diddles(v);
+    return new Fiddles(v);
 }
 function DCallPacker(v) {
     assert(v instanceof DCall);
@@ -77,10 +77,10 @@ MsgpackUtils_codec.addExtPacker(0x52, DRef, DRefPacker);
 MsgpackUtils_codec.addExtUnpacker(0x52, DRefUnpacker);
 MsgpackUtils_codec.addExtPacker(0x45, DError, DErrorPacker);
 MsgpackUtils_codec.addExtUnpacker(0x45, DErrorUnpacker);
-MsgpackUtils_codec.addExtPacker(0x64, Diddle, DiddlePacker);
-MsgpackUtils_codec.addExtUnpacker(0x64, DiddleUnpacker);
-MsgpackUtils_codec.addExtPacker(0x44, Diddles, DiddlesPacker);
-MsgpackUtils_codec.addExtUnpacker(0x44, DiddlesUnpacker);
+MsgpackUtils_codec.addExtPacker(0x64, Fiddle, FiddlePacker);
+MsgpackUtils_codec.addExtUnpacker(0x64, FiddleUnpacker);
+MsgpackUtils_codec.addExtPacker(0x44, Fiddles, FiddlesPacker);
+MsgpackUtils_codec.addExtUnpacker(0x44, FiddlesUnpacker);
 MsgpackUtils_codec.addExtPacker(0x43, DCall, DCallPacker);
 MsgpackUtils_codec.addExtUnpacker(0x43, DCallUnpacker);
 // no packer for tuple because no tuple in javascript
@@ -103,7 +103,7 @@ class MsgpackUtils {
 // 0x53 'S' Set
 // 0x52 'R' DRef
 // 0x45 'E' DError
-// 0x64 'd' Diddle
-// 0x44 'D' Diddles
+// 0x64 'd' Fiddle
+// 0x44 'D' Fiddles
 // 0x43 'C' DCall
 // 0x54 'T' tuple
