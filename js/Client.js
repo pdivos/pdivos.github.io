@@ -79,6 +79,15 @@ class Client {
     get_dcommitsets() {
         return this._call("get_dcommitsets")
     }
+    get_dcommitset(dcommitset) {
+        return this._call("get_dcommitset",[dcommitset])
+    }
+    get_dcommits() {
+        return this._call("get_dcommits")
+    }
+    get_dcommit(dcommit) {
+        return this._call("get_dcommit",[dcommit])
+    }
     get_nodes() {
         return this._call("get_nodes");
     }

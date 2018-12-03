@@ -15,16 +15,19 @@ function main() {
         // ];
         // c.echo(test);
         // c.err();
-        window.setInterval(function(){
-            var msg_id = c.ping();
-            ping_start_times[msg_id] = new Date();
-        }, 1000);
-
+        // window.setInterval(function(){
+        //     var msg_id = c.ping();
+        //     ping_start_times[msg_id] = new Date();
+        // }, 1000);
         // c.get_nodes_raw();
         // c.get_nodes();
         // c.build("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#aa27a1a");
         // c.worker_logs();
         // c.shutdown();
+        c.get_dcommitsets();
+        c.get_dcommitset("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#55454fd");
+        c.get_dcommits();
+        c.get_dcommit("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#55454fd");
     }, function(msg_id, method, args, response) {
         if(method == "ping" && msg_id in ping_start_times) {
             var ping_time = new Date() - ping_start_times[msg_id];
