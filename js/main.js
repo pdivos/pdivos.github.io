@@ -1,6 +1,6 @@
 function main() {
-    var host = "35.176.145.209";
-    // var host = "127.0.0.1";
+    // var host = "35.176.145.209";
+    var host = "127.0.0.1";
     var ping_start_times = [];
     var c = new Client(host,function(){
         // var test = [
@@ -24,12 +24,16 @@ function main() {
         // c.build("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#aa27a1a");
         // c.worker_logs();
         // c.shutdown();
-        c.get_dcommitsets();
-        c.get_dcommitset("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#55454fd");
-        c.get_dcommitset("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#81875bc");
-        c.get_dcommits();
-        c.get_dcommit("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#55454fd");
-        c.get_dcommit("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#81875bc");
+        // c.get_dcommitsets();
+        // c.get_dcommitset("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#55454fd");
+        // c.get_dcommitset("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#81875bc");
+        // c.get_dcommits();
+        // c.get_dcommit("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#55454fd");
+        // c.get_dcommit("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#81875bc");
+        c.get_workers();
+        c.get_worker_logs();
+        c.get_nodes();
+        c.get_node(0);
     }, function(msg_id, method, args, response) {
         if(method == "ping" && msg_id in ping_start_times) {
             var ping_time = new Date() - ping_start_times[msg_id];

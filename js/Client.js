@@ -95,15 +95,18 @@ class Client {
         return this._call("get_nodes_raw");
     }
     get_node(id) {
-        assert(id instanceof int, id);
+        assert(typeof(id) === 'number', id);
         return this._call("get_node",[id]);
     }
     build(dcommitset) {
         assert(typeof dcommitset === 'string', dcommitset);
         return this._call("build",[dcommitset]);
     }
-    worker_logs() {
-        return this._call("worker_logs");
+    get_workers() {
+        return this._call("get_workers");
+    }
+    get_worker_logs() {
+        return this._call("get_worker_logs");
     }
 }
 
