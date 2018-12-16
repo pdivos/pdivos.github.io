@@ -76,6 +76,9 @@ class Client {
     err() {
         return this._call("err");
     }
+    echo(v) {
+        return this._call("echo",[v]);
+    }
     get_dcommitsets() {
         return this._call("get_dcommitsets")
     }
@@ -110,9 +113,6 @@ class Client {
     }
     get_worker(worker_id) {
         return this._call("get_worker",[worker_id])
-    }
-    get_worker_logs() {
-        return this._call("get_worker_logs");
     }
 }
 

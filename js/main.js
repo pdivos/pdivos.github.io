@@ -5,17 +5,17 @@ function main() {
     var host = "127.0.0.1";
     var ping_start_times = [];
     var c = new Client(host,function(){
-        // var test = [
-        //     DStatus.SUCCEEDED,
-        //     DFunType.LAMBDA,
-        //     new Set([1,2,3]),
-        //     new DRef(new Uint8Array([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19])),
-        //     new DError("My Error message"),
-        //     new Fiddle("func",[19],0,1),
-        //     new Fiddles([new Fiddle("func",[19],0,1)]),
-        //     new DCall("dcommitset#1234567","func",[19],0,new Fiddles([])),
-        // ];
-        // c.echo(test);
+        var test = [
+            DStatus.SUCCEEDED,
+            DFunType.LAMBDA,
+            new Set([1,2,3]),
+            new DRef(new Uint8Array([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19])),
+            new DError("My Error message"),
+            new Fiddle("func",[19],0,1),
+            new Fiddles([new Fiddle("func",[19],0,1)]),
+            new DCall("dcommitset#1234567","func",[19],0,new Fiddles([])),
+        ];
+        c.echo(test);
         // c.err();
         // window.setInterval(function(){
         //     var msg_id = c.ping();
@@ -32,9 +32,9 @@ function main() {
         // c.get_dcommits();
         // c.get_dcommit("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#55454fd");
         // c.get_dcommit("https://pdivos@bitbucket.org/pdivos/dagger4_test1.git#81875bc");
-        c.get_workers();
-        c.get_worker_logs();
-        c.get_nodes();
+        // c.get_workers();
+        // c.get_worker_logs();
+        // c.get_nodes();
         c.get_node(0);
     }, function(msg_id, method, args, response) {
         if(method == "ping" && msg_id in ping_start_times) {
