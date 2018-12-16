@@ -88,6 +88,9 @@ class Client {
     get_dcommit(dcommit) {
         return this._call("get_dcommit",[dcommit])
     }
+    get_dcallable(dcallable_hash) {
+        return this._call("get_dcallable",[dcallable_hash])
+    }
     get_nodes() {
         return this._call("get_nodes");
     }
@@ -104,6 +107,9 @@ class Client {
     }
     get_workers() {
         return this._call("get_workers");
+    }
+    get_worker(worker_id) {
+        return this._call("get_worker",[worker_id])
     }
     get_worker_logs() {
         return this._call("get_worker_logs");

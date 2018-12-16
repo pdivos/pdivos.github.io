@@ -1,4 +1,6 @@
 function main() {
+    // testMsgpackUtils();
+    
     // var host = "35.176.145.209";
     var host = "127.0.0.1";
     var ping_start_times = [];
