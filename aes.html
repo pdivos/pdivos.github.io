@@ -105,7 +105,10 @@ function confirmedPass()
         if(query.length>1 && query.substr(0,1)==="?") {
         	document.body.innerHTML = '';
         	var encrypted = query.substr(1,query.length);
-        	var password = prompt("password");
+		localStorage = window.localStorage;
+		var password = localStorage.getItem("aes_password");
+		if(password==null) prompt("password");
+		localStorage.setItem("aes_password", password);
         	var decrypted = CryptoJS.AES.decrypt(encrypted,password).toString(CryptoJS.enc.Utf8);
         	document.write("<pre><code>"+decrypted+"</code></pre>");
         }
