@@ -107,7 +107,7 @@ function confirmedPass()
         	var encrypted = query.substr(1,query.length);
 		localStorage = window.localStorage;
 		var password = localStorage.getItem("aes_password");
-		if(password==null) prompt("password");
+		if(password==null) password = prompt("password");
 		localStorage.setItem("aes_password", password);
         	var decrypted = CryptoJS.AES.decrypt(encrypted,password).toString(CryptoJS.enc.Utf8);
         	document.write("<pre><code>"+decrypted+"</code></pre>");
